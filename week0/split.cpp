@@ -32,7 +32,8 @@ int main() {
     printVec(vec);
 
     string s1 = "a,b,c,d,e";
-    // printVec(split(s1, ","));
+    printVec(split(s1, ","));
 
     string s2 = "aa bb cc dd ";
+    printVec(split(s2, " "));
 }
