@@ -13,12 +13,15 @@ bool check(int n, int digits) {
 }
 
 int main() {
+    // n이 한번 들어왔을 때 n : 1 ~ 10,000
     int n;
     cin >> n;
 
+    // digits 자리수 하나씩 늘려가면서 확인
     int digits = 0;
     while (!check(n, digits)) {
         digits++;
     }
-    cout << (digits + 1);    
+    // digits : 10의 몇승인지
+    cout << (digits + 1);
 }
