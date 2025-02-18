@@ -2,7 +2,20 @@
 using namespace std;
 
 bool isGood(string s) {
-
+    cout << "call isGood(), para s=" << s << '\n';
+    if (s.size() == 0) {
+        return true;
+    }
+    char first = s[0];
+    auto next = s.find(first, 1);
+    if (next == 1 && s.size() == 2) {
+        return true;
+    }
+    if (next == string::npos){
+        return false;
+    }
+    cout << "recursive call: " << s.substr(1, next - 1) << ", " << s.substr(next + 1) << '\n';
+    return isGood(s.substr(1, next - 1)) && isGood(s.substr(next + 1));
 }
 int main() {
     int n;
