@@ -11,13 +11,14 @@ vector<string> split(const string input, string delimiter) {
         end = input.find(delimiter, end + delimiter.size());
         result.push_back(substring);
     }
+    result.push_back(input.substr(start)); // 마지막 꺼 추가
     return result;
 }
 
 void printVec(const vector<string> &v) {
     cout << "size of vector: " << v.size() << "\n[";
     for (auto s: v) {
-        cout << s << ' ';
+        cout << s << '|';
     }
     cout << "\b]\n";
 }
@@ -31,9 +32,12 @@ int main() {
 
     printVec(vec);
 
-    string s1 = "a,b,c,d,e";
+    string s1 = "a,b,c,d,e"; // -> e가 안나옴옴
     printVec(split(s1, ","));
 
-    string s2 = "aa bb cc dd ";
+    string s2 = "aa bb cc dd "; // 빈 문자열이 추가됨
     printVec(split(s2, " "));
+
+    string s3 = "qq, wer, poiasf, asdf;123, 00,aldsfj, asldfk aaa, z"; // -> 마지막 z가 안나옴옴
+    printVec(split(s3, ", "));
 }
