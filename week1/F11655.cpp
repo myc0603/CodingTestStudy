@@ -14,27 +14,26 @@ char encodeChar(char c) {
         return newChar;
     }
     // cout << "not alphabet\n";
-    return ' ';
+    return c;
 }
 
 int main() {
     string s;
-    // getline(cin, s);    
+    getline(cin, s);    
     
     string encoded = "";
-    // for (char c : s) {
-    //     encoded += encodeChar(c);
-    // }
-    for (char i = 0; i < 128; i++) {
-        // cout << i << endl;
-        // cout << encodeChar(i) << '\n';
-        encodeChar(i);
-        if (i == 127 || i == 128 || i == 0) {
-            cout << (int) i << endl;
-        }
+    for (char c : s) {
+        encoded += encodeChar(c);
     }
-    cout << '\n';
+    cout << encoded;
 
-
-    // cout << encoded;
+    // for (char i = 0; i < 128; i++) {
+    //     // cout << i << endl;
+    //     // cout << encodeChar(i) << '\n';
+    //     encodeChar(i);
+    //     if (i == 127 || i == 128 || i == 0) {
+    //         cout << (int) i << endl;
+    //     }
+    // }
+    // cout << '\n';
 }

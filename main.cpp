@@ -1,30 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isGood(string s) {
-    if (s.size() == 0) {
-        return true;
+char encodeChar(char c) {
+    if ('a' <= c && c <= 'z') {
+        // cout << "small\n";
+        char newChar = ((c - 'a') + 13) % 26 + 'a';
+        return newChar;
     }
-    char first = s[0];
-    auto next = s.find(first, 1);
-    if (next == 1 && s.size() == 2) {
-        return true;
+
+    if ('A' <= c && c <= 'Z') {
+        // cout << "capital\n";
+        char newChar = ((c - 'A') + 13) % 26 + 'A';
+        return newChar;
     }
-    if (next == string::npos){
-        return false;
-    }
-    return isGood(s.substr(1, next - 1)) && isGood(s.substr(next + 1));
+    // cout << "not alphabet\n";
+    return c;
 }
+
 int main() {
-    int n;
-    cin >> n;
-    int cnt = 0;
-    for (int i = 0; i < n; i++) {
-        string s;
-        cin >> s;
-        if (isGood(s)) {
-            cnt++;
+
+    // for (int i = 0; i < 128; i++) {
+    //     cout << encodeChar(i) << ' ';
+    // }
+    // cout << '\n';
+
+    for (char i = 0; i < 127; i++) {
+        if (i == 127 || i == 128 || i == 0) {
+            cout << (int) i << endl;
         }
     }
-    cout << cnt;
+    char i = 127;
+    cout << (int) i << ": " << i << '\n';
+    i++;
+    cout << (int) i << ": " << i << '\n';
+
 }
