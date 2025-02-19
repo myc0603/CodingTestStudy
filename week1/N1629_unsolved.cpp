@@ -5,11 +5,24 @@ int main() {
     int a, b, c;
     cin >> a >> b >> c;
 
-    long long ll = 1;
-    int remainder = 1; // long long? 0으로 초기화?
-    for (int i = 0; i < b; i++) {
-        ll *= a;
-        remainder = remainder * a % c;
+    if (b <= c) {
+        long long remainder = 1;
+        for (int i = 0; i < b; i++) {
+            remainder = remainder * a % c;
+        }
+        cout << remainder;
+        return 0;
     }
-    cout << remainder;
+    
+
+    // b > c
+    int rem[c];
+    long long remainder = 1;
+    for (int i = 1; i < c; i++) {
+        remainder = remainder * a % c;
+        rem[i] = remainder;
+    }
+    cout << rem[b % (c-1)];
+
+    return 0;
 }
