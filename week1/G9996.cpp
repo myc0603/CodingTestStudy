@@ -7,6 +7,8 @@ bool matchPattern(string pattern, string input) {
     string front = pattern.substr(0, index);
     string back = pattern.substr(index + 1);
     cout << front << " | " << back << '\n';
+    // input에서 back의 위치는 front보다 뒤여야 한다.
+    // -> backPos는 front.size()보다 커야됨
     if (input.size() < front.size() + back.size()) {
         return false;
     }
@@ -32,7 +34,9 @@ int main() {
     for (int i = 0; i < n; i++) {
         string s;
         cin >> s;
-        string output = matchPattern(pattern, s) ? "DA\n" : "NE\n";
+        string output = matchPattern(pattern, s) ? "DA" : "NE";
+        // 연속으로 계속 출력해야 할 때는 '\n'...추가....
+        // 아니면 습관적으로 하는게 나을 듯
         cout << output << '\n';
     }
 }
