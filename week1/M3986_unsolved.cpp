@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// have to find counterEx
+
 bool isGood(string s) {
     cout << "call isGood(), para s=" << s << '\n';
     if (s.size() == 0) {

@@ -5,14 +5,14 @@ int main() {
     int a, b, c;
     cin >> a >> b >> c;
 
-    if (b <= c) {
-        long long remainder = 1;
-        for (int i = 0; i < b; i++) {
-            remainder = remainder * a % c;
-        }
-        cout << remainder;
-        return 0;
+
+    long long remainder = 1;
+    for (int i = 0; i < b; i++) {
+        remainder = remainder * a % c;
     }
+    cout << remainder;
+    return 0;
+    
     
 
     // b > c
