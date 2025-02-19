@@ -1,37 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-char encodeChar(char c) {
-    if ('a' <= c && c <= 'z') {
-        // cout << "small\n";
-        char newChar = ((c - 'a') + 13) % 26 + 'a';
-        return newChar;
+bool matchPattern(string pattern, string input) {
+    // split
+    int index = pattern.find('*');
+    string front = pattern.substr(0, index);
+    string back = pattern.substr(index + 1);
+    bool f = input.find(front) == 0;
+    // input.find(back) 할때 뒤에서부터 찾아야됨됨
+    int backPos = input.size() - back.size();
+    bool b = input.find(back, backPos) == backPos;
+    if (index == 0) { // *xxx
+        return b;
+    } else if (index == (pattern.size() - 1)) { // xxx*
+        return f;
+    } else {
+        return f && b;
     }
 
-    if ('A' <= c && c <= 'Z') {
-        // cout << "capital\n";
-        char newChar = ((c - 'A') + 13) % 26 + 'A';
-        return newChar;
-    }
-    // cout << "not alphabet\n";
-    return c;
 }
 
 int main() {
-
-    // for (int i = 0; i < 128; i++) {
-    //     cout << encodeChar(i) << ' ';
-    // }
-    // cout << '\n';
-
-    for (char i = 0; i < 127; i++) {
-        if (i == 127 || i == 128 || i == 0) {
-            cout << (int) i << endl;
-        }
+    int n;
+    cin >> n;
+    string pattern;
+    cin >> pattern;
+    for (int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        string output = matchPattern(pattern, s) ? "DA" : "NE";
+        cout << output;
     }
-    char i = 127;
-    cout << (int) i << ": " << i << '\n';
-    i++;
-    cout << (int) i << ": " << i << '\n';
-
 }
