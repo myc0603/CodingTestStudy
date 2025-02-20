@@ -29,11 +29,11 @@ int main() {
     int k = 4;
     int subSum1[n-k+1] = {};
     for (int i = 0; i <= n-k; i++) {
-        subSum1[i] = psum[k+i] - psum[k];
+        subSum1[i] = psum[k+i] - psum[i];
     }
     int subSum2[n-k+1] = {};
     for (int i = k; i <= n; i++) {
-        subSum2[k-i] = psum[i] - psum[i-k];
+        subSum2[i-k] = psum[i] - psum[i-k];
     }
     printArr(a, n+1);
     printArr(psum, n+1);
