@@ -2,7 +2,6 @@
 using namespace std;
 
 // 조합 순열 split() 연습
-// 1-A, B
 
 void printArr(int* arr, int n) {
     for (int i = 0; i < n; i++) {
