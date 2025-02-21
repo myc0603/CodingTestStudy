@@ -7,7 +7,8 @@ bool match(string pat, string s) {
 
     if (s.size() < pre.size() + suf.size()) return false;
     bool cond1 = s.find(pre) == 0;
-    bool cond2 = s.find(suf, s.size() - suf.size());
+    int sufIdx = s.size() - suf.size();
+    bool cond2 = s.find(suf, sufIdx) == sufIdx;
     return cond1 && cond2;
 }
 int main() {
