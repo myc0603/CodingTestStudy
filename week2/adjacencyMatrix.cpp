@@ -31,7 +31,7 @@ void funcV2(bool a[][10], int n, int from, vector<int> &visited) {
         if (find(visited.begin(), visited.end(), j) != visited.end()) continue;
         if (a[from][j]) {
             // do something
-            cout << from << ',' << j << '\n';
+            cout << from << "->" << j << '\n';
             visited.push_back(from);
             funcV2(a, n, j, visited);
         }
