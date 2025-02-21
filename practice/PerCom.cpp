@@ -62,7 +62,22 @@ void combiV2(int* from, vector<int> result, int n, int r, int start) {
     }
 }
 
-vector<vector<int>> combis();
+// make recursive combination func have return value as a vector<int>.
+/**
+ * 재귀호출되면서 vector to가 새로만들어지면 안되지 파라미터로 계속 전달해야됨
+ * return할 필요가 없음
+ */
+// vector<int> combiV3() {}
+
+/**
+ * 재귀호출은 각 호출에서 하나의 변수를 사용하기 위해서는 그 변수를 파라미터로 넘길 수 밖에 없고
+ * 함수 안에서 변수를 선언해서 초기화하면 각 호출되는 함수가 서로 공유하지 못한다.
+*/
+// vector<vector<int>> combis(int* from, vector<int> to, int n, int r, int idx) {
+//     if (to.size() == r) {
+
+//     }
+// }
 
 int main() {
     int n = 4;
