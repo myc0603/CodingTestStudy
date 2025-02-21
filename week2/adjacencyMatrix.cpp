@@ -11,46 +11,61 @@ void printMat(bool a[][10], int n) {
 }
 
 // before 처음에는 -1같은거 넣으면 됨
-void funcV1(bool a[][10], int n, int vertex, int before) {
+void funcV1(bool a[][10], int n, int from, int visited) {
     for (int j = 0; j < n; j++) {
         // before는 무시
-        if (j == before) continue;
-        if (a[vertex][j]) {
+        if (j == visited) continue;
+        if (a[from][j]) {
             // do something
-            cout << vertex << ',' << j << '\n';
-            funcV1(a, n, j, vertex);
+            cout << from << ',' << j << '\n';
+            funcV1(a, n, j, from);
         }
     }
 }
 
 // 방문한 vertex들을 모두 before에 저장
-void funcV2(bool a[][10], int n, int vertex, vector<int> before) {
+void funcV2(bool a[][10], int n, int from, vector<int> &visited) {
+    cout << "call funcV2, vertex: " << from << '\n';
     for (int j = 0; j < n; j++) {
         // before는 무시
-        if (find(before.begin(), before.end(), j) == before.end()) continue;
-        if (a[vertex][j]) {
+        if (find(visited.begin(), visited.end(), j) != visited.end()) continue;
+        if (a[from][j]) {
             // do something
-            cout << vertex << ',' << j << '\n';
-            funcV1(a, n, j, vertex);
+            cout << from << ',' << j << '\n';
+            visited.push_back(from);
+            funcV2(a, n, j, visited);
         }
+    }
+}
+
+void go(bool a[][10], int n, int from, int* visited) {
+    visited[from] = 1;
+    cout << from << '\n';
+    for (int i = 0; i < n; i++) {
+        if (visited[i]) continue;
+        if (a[from][i]) go(a, n, i, visited);
     }
 }
 
 int main() {
     bool a[10][10] = {{}};
-    printMat(a, 10);
-    cout << "==============\n";
+    // printMat(a, 10);
+    // cout << "==============\n";
     a[1][2] = 1;
     a[2][1] = 1;
     a[1][3] = 1;
     a[3][1] = 1;
     a[3][4] = 1;
     a[4][3] = 1;
-    printMat(a, 10);
-    cout << "==============\n";
+    // printMat(a, 10);
+    // cout << "==============\n";
 
-    for (int i = 0; i < 10; i++) {
-        cout << "initial vertex: " << i << '\n';
-        funcV1(a, 10, i, -1);
-    }
+    // for (int i = 0; i < 10; i++) {
+    //     cout << "initial vertex: " << i << '\n';
+    //     funcV1(a, 10, i, -1);
+    // }
+    funcV1(a, 10, 1, -1);
+    cout << "==============\n";
+    vector<int> before;
+    funcV2(a, 10, 1, before);
 }
