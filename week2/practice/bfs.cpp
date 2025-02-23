@@ -4,6 +4,7 @@ using namespace std;
 const int n = 10;
 vector<int> adj[n];
 bool visited[n];
+
 void bfs(int root) {
     queue<int> q;
     q.push(root);
@@ -11,12 +12,16 @@ void bfs(int root) {
 
         // visit logic
         int u = q.front();
-        q.pop();
         cout << "visit: " << u << '\n';
+        q.pop();
         
         for (int v : adj[u]) {
-            cout << "q.push: " << v << '\n';
-            q.push(v);
+            if (visited[v] == 0) {
+                cout << "q.push: " << v << '\n';
+                q.push(v);
+                visited[v] = 1;
+                // visited[v] = visited[u] + 1;
+            }
         }
     }
 }
@@ -33,5 +38,4 @@ int main() {
     adj[4].push_back(10);
 
     bfs(1);
-    // bfs2(1);
 }
