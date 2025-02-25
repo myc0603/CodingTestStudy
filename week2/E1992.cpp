@@ -66,7 +66,7 @@ string compress(vector<int> a[]) {
     string s2 = compress(v2);
     string s3 = compress(v3);
     string s4 = compress(v4);
-    if (s1 == s2 && s2 == s3 && s3 == s4) {
+    if (s1 == s2 && s2 == s3 && s3 == s4 && s1.size() == 1) {
         return s1;
     }
     return "(" + s1 + s2 + s3 + s4 + ")";
@@ -86,3 +86,9 @@ int main() {
 
     cout << compress(a) << '\n';
 }
+// 4
+// 1010
+// 1010
+// 1010
+// 1010
+// (1010)
