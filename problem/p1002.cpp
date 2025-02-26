@@ -33,7 +33,7 @@ int main() {
         printf("%d %d %d %d %d %d", jo.x, jo.y, jo.r, baek.x, baek.y, baek.r);
         double dis = distance(jo.x-baek.x, jo.y-baek.y);
         
-        cout << possiblePosNum(jo.r, baek.r, dis);
+        cout << possiblePosNum(jo.r, baek.r, dis) << '\n';
     }
 
     return 0;
