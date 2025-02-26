@@ -6,23 +6,18 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     int n; cin >> n;
 
-    stack<pair<int, int>> stk; // idx, num
-    int ans[n];
+    stack<int> stk; // 인덱스를 넣는다.
+    int a[n], ans[n];
+    fill(ans, ans + n, -1); // 오큰수 못찾으면 못 찾는대로 -1
     for (int i = 0; i < n; i++) {
-        
-        int num; cin >> num;
-        
-        while (stk.size() && stk.top().second < num) {
-            ans[stk.top().first] = num;
+        cin >> a[i];
+        while (stk.size() && a[stk.top()] < a[i]) {
+            ans[stk.top()] = a[i];
             stk.pop();
         }
-        stk.push({i, num});
+        stk.push(i);
     }
 
-    while (stk.size()) {
-        ans[stk.top().first] = -1;
-        stk.pop();
-    }
 
     string s;
     for (int num : ans) {
