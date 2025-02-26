@@ -4,14 +4,6 @@ using namespace std;
 string compress(vector<int> a[]) {
     int n = a[0].size();
 
-    cout << "call compress(), print input a of size: " << n << "\n";
-    for (int i = 0; i < n; i++) {
-        for (int num : a[i]) {
-            cout << num;
-        }
-        cout << '\n';
-    }
-
     if (n == 0) return "";
     if (n == 1) {
         char c = a[0][0] + '0';
@@ -30,36 +22,6 @@ string compress(vector<int> a[]) {
             v3[i-n/2].assign(start1, start2);
             v4[i-n/2].assign(start2, a[i].end());
         }
-    }
-
-    // 디버깅용 v1 ~ v4 print
-    cout << "print v1\n";
-    for (auto v : v1) {
-        for (int num : v) {
-            cout << num;
-        }
-        cout << '\n';
-    }
-    cout << "print v2\n";
-    for (auto v : v2) {
-        for (int num : v) {
-            cout << num;
-        }
-        cout << '\n';
-    }
-    cout << "print v3\n";
-    for (auto v : v3) {
-        for (int num : v) {
-            cout << num;
-        }
-        cout << '\n';
-    }
-    cout << "print v4\n";
-    for (auto v : v4) {
-        for (int num : v) {
-            cout << num;
-        }
-        cout << '\n';
     }
 
     string s1 = compress(v1);
@@ -86,9 +48,3 @@ int main() {
 
     cout << compress(a) << '\n';
 }
-// 4
-// 1010
-// 1010
-// 1010
-// 1010
-// (1010)
