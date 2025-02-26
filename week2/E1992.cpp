@@ -4,7 +4,7 @@ using namespace std;
 string compress(vector<int> a[]) {
     int n = a[0].size();
 
-    if (n == 0) return "";
+    if (n == 0) return ""; // 필요없음
     if (n == 1) {
         char c = a[0][0] + '0';
         string s = string(1, c);
