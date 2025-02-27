@@ -7,7 +7,7 @@ int dy[] = {1, -1, 0, 0};
 int dx[] = {0, 0, 1, -1};
 
 bool inMap(int y, int x) {
-    return 0 <= y & y < n && 0 <= x && x < m;
+    return 0 <= y && y < n && 0 <= x && x < m;
 }
 
 void dfs(int y, int x) {

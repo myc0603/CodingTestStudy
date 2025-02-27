@@ -7,7 +7,7 @@ int dy[] = {1, -1, 0, 0};
 int dx[] = {0, 0, 1, -1};
 
 bool inMap(int y, int x) {
-    return 0 <= y & y < n && 0 <= x && x < m;
+    return 0 <= y && y < n && 0 <= x && x < m;
 }
 
 // 이렇게 고치면 될 거 같기는 한데 어차피 dfs(area = 0)에서 0으로 들어간 area값이
@@ -62,7 +62,6 @@ int main() {
         }
     }
 
-    int cnt = 0;
     vector<int> areas;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
