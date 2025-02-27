@@ -13,27 +13,32 @@ int winning(int score[]) {
     return 0;
 }
 
+void printWinningTimes(int winningTimes[]) {
+    for (int i = 1; i <= 2; i++) {
+        int min = winningTimes[i] / 60;
+        int sec = winningTimes[i] % 60;
+        cout << setfill('0') << setw(2) << min << ':' << setw(2) << sec << '\n';
+    }   
+}
+
 int main() {
     int n; cin >> n;
 
     int score[3] = {};
     int winningTimes[3] = {};
-
     int before = 0; int end = 60 * 48;
-
-    for (int i = 0; i < n; i++) {
+    while (n--) {
         int team; cin >> team;
-        score[team]++;
-
         string timeStr; cin >> timeStr;
+
         int time = timeConvertStoI(timeStr);
         winningTimes[winning(score)] += time - before;
+
+        score[team]++;
 
         before = time;
     }
     winningTimes[winning(score)] += end - before;
 
-    for (int t : winningTimes) {
-        cout << setfill('0') << setw(2) << t / 60 << ':' << setw(2) << t % 60 << '\n';
-    }
+    printWinningTimes(winningTimes);
 }
