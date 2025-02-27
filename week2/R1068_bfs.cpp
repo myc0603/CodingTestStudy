@@ -62,7 +62,7 @@ int main() {
         adj[a[i]].push_back(i);
     }
 
-    // delete node
+    // to be deleted node
     int delNode;
     cin >> delNode;
 
