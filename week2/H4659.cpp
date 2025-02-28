@@ -14,6 +14,8 @@ bool cond1(string s) {
 }
 
 // 모음 연속 3개 이상 또는 자음 연속 3개 이상 안됨
+// before에 s[0]에 대한 정보가 들어가서 첫번째 루프에서 무조건 before == cur이 되더라도
+// 이때 cnt가 1이 되기 때문에 괜찮음. 대신 cnt를 0으로 초기화해서 첫번래 루프에서 cnt가 1이 되도록 해줘야됨
 bool cond2(string s) {
     bool before = isVowel(s[0]);
     int cnt = 0;
