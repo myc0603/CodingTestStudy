@@ -44,6 +44,29 @@ int calculate(string expression) {
     return result;
 }
 
+bool isNumber(char c) {
+    return '0' <= c && c <= '9';
+}
+
+int calculateV2(string expression) {
+    vector<int> numsVec;
+    vector<char> opsVec;
+
+    string numString = "";
+    int len = expression.size();
+    for (int i = 0; i <= len; i++) {
+        if (i == len) {
+            int num = stoi(numString);
+            numsVec.push_back(num);
+        }
+        if (isNumber(expression[i])) {
+            numString += expression[i];
+            continue;
+        }
+    }
+
+}
+
 void combi(int n, vector<pair<int, int>> &to, int idx) {
     // cout << "print vector<pair> to\n";
     for (auto p : to) {
