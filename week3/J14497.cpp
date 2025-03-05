@@ -48,7 +48,7 @@ bool dfs(int y, int x, vector<pair<int, int>> &v) {
 
         if (!inMap(ny, nx) || visited[ny][nx]) continue;
         if (a[ny][nx] == 0) {
-            visited[ny][nx] = 1;
+            // visited[ny][nx] = 1;
             result = dfs(ny, nx, v) || result;
         } else if (a[ny][nx] == 1) {
             v.push_back({ny, nx});
