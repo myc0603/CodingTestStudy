@@ -40,7 +40,6 @@ void makePermutation(string s, int n, int r, int depth) {
 
 int main() {
     cin >> k;
-    signs;
     for (int i = 0; i < k; i++) {
         char c; cin >> c;
         signs.push_back(c);
