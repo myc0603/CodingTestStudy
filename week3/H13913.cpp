@@ -4,31 +4,6 @@ using namespace std;
 int n, k;
 int visited[200001];
 
-void printV(vector<int> & v) {
-    for (int num : v) {
-        cout << num << ' ';
-    }
-}
-
-// void dfs(int cur, vector<int> &path) {
-//     cout << "call dfs(), cur: " << cur << '\n';
-//     visited[cur] = 1;
-
-//     if (cur == k) {
-//         printV(path);
-//         return;
-//     }
-
-//     for (int next : {cur + 1, cur - 1, cur * 2}) {
-//         if (next < 0 || next > 200000) continue;
-//         if (!visited[next]) {
-//             path.push_back(next);
-//             dfs(next, path);
-//             path.pop_back();
-//         }
-//     }
-// }
-
 int main() {
     cin >> n >> k;
 
