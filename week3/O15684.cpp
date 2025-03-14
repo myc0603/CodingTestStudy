@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m, h, ladder[31][10];
+int n, m, h, ladder[31][11];
 
 bool check() {
     for (int x = 1; x <= n; x++) {
@@ -22,16 +22,12 @@ bool check() {
 }
 
 bool canAdd(int y, int x) {
-    if (x > 1 && ladder[y][x-1] == 1) return false;
-    if (x < n && ladder[y][x+1] == 1) return false;
+    // if (x > 1 && ladder[y][x-1] == 1) return false;
+    if (ladder[y][x-1] == 1) return false;
+    // x < n 조건을 빼려면 ladder[31][11]로 선언해줘야 괜찮을 것이라고 생각됨
+    // if (x < n && ladder[y][x+1] == 1) return false;
+    if (ladder[y][x+1] == 1) return false;
     return true;
-}
-
-void checkAndExit(int cnt) {
-    if (check()) {
-        cout << cnt << '\n';
-        exit(0);
-    }
 }
 
 pair<int, int> getCoordFromIdx(int idx) {
