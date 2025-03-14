@@ -2,6 +2,24 @@
 using namespace std;
 const int INF = 987654321;
 int n, m, h, a, b, ret = INF, visited[34][34];
+void printLadder(int depth) {
+    string indent = "";
+    while (depth--) indent += "   ";
+    cout << indent << "==print ladder==\n" << indent;
+    for (int i = 1; i <= h; i++) {
+        for (int j = 1; j < n; j++) {
+            cout << visited[i][j] << ' ';
+        }
+    }
+    cout << "\n\n";
+    for (int i = 1; i <= h; i++) {
+        cout << indent;
+        for (int j = 1; j < n; j++) {
+            cout << visited[i][j] << ' ';
+        }
+        cout << '\n';
+    }
+}
 bool check(){
     for(int i = 1; i <= n; i++){
         int start = i;
@@ -13,33 +31,27 @@ bool check(){
     }
     return true;
 }
-void go(int sx, int sy, int cnt){ 
+void go(int sy, int sx, int cnt){ 
     if(cnt > 3 || cnt >= ret) return;
     if(check()){
-        cout << "is valid~!!\n";
+        cout << "is valid!!\n";
         ret = min(ret, cnt); return;
     }
-
     int depth = cnt;
     string indent = "\n";
     while (depth--) indent += "   ";
-
-    for(int j = 1; j < n; j++){
-        // int i = j == sx ? sy : 1;
-        int i = 1;
-        for(; i <= h; i++){
+    for(int i = sy; i <= h; i++){
+        int j = i == sy ? sx : 1;
+        for(; j < n; j++){
             if(visited[i][j] || visited[i][j - 1] || visited[i][j + 1]) {
                 cout << indent << "count: " << cnt << ", i,j: " << i << ',' << j << " -> cannot add" << '\n';
                 continue;
             }
             visited[i][j] = 1;
             cout << indent << "count: " << cnt << ", i,j: " << i << ',' << j << " -> add!!" << '\n';
-
-            go(j, i, cnt + 1);
+            // printLadder(cnt);
+            go(i, j, cnt + 1);
             visited[i][j] = 0;
-            
-            while(!visited[i][j] && !visited[i][j-1] && !visited[i][j+1]) i++;
-            // i--;
         }
     }
 }
