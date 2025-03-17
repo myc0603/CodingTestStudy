@@ -60,30 +60,22 @@ int main() {
             flipRowIdx >>= 1;
         }
 
-        // int prevCol = (1 << n) - 1;
-        // for (int curCol = 1; curCol < (1 << n); curCol++) {
-        //     // flip
-        //     int flipColIdx = prevCol ^ curCol;
-        //     for (int j = 0; flipColIdx; j++) {
-        //         if (flipColIdx % 2) {
-        //             flipCol(j);
-        //         }
-        //         flipColIdx >>= 1;
-        //     }
-
-        //     minTailCount = min(minTailCount, tailCount);
-
-        //     prevCol = curCol;
-        // }
-
-        for (int col = 0; col < n; col++) {
-            if (colTailCount[col] > (n/2)) {
-                flipCol(col);
+        int prevCol = (1 << n) - 1;
+        for (int curCol = 1; curCol < (1 << n); curCol++) {
+            // flip
+            int flipColIdx = prevCol ^ curCol;
+            for (int j = 0; flipColIdx; j++) {
+                if (flipColIdx % 2) {
+                    flipCol(j);
+                }
+                flipColIdx >>= 1;
             }
 
             minTailCount = min(minTailCount, tailCount);
-        }
 
+            prevCol = curCol;
+        }
+        
         prevRow = curRow;
     }
 
