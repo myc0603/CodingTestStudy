@@ -7,12 +7,9 @@ int visited[1024];
 int idx = 1;
 
 void makeTree(int nodeCnt) {
-
     for (int i = 1; i <= nodeCnt/2; i++) {
-        vector<int> v;
-        v.push_back(2 * i);
-        v.push_back(2 * i + 1);
-        adj[i] = v;
+        adj[i].push_back(2 * i);
+        adj[i].push_back(2 * i + 1);
     }
 }
 
@@ -59,13 +56,19 @@ int main() {
     int k; cin >> k;
     int nodeCnt = pow(2, k) - 1;
     for (int i = 1; i <= nodeCnt; i++) {
-        int num; cin >> num;
-        buildingOrder[i] = num;
+        cin >> buildingOrder[i];
     }
     makeTree(nodeCnt);
-
     inOrder(1);
-    bfs();
-
     
+    string ans;
+    int temp = 2;
+    for (int i = 1; i <= nodeCnt; i++) {
+        if (i % temp == 0) {
+            ans += '\n';
+            temp *= 2;
+        }
+        ans += to_string(buildingNum[i]) + ' ';
+    }
+    cout << ans;
 }
