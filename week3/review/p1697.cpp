@@ -18,7 +18,8 @@ int main() {
         int cur = q.front(); q.pop();
 
         for (int next : {cur + 1, cur - 1, cur * 2}) {
-            if (0 <= next && next <= 200000 && !visited[next]) {
+            // if (0 <= next && next <= 200000 && !visited[next]) {
+            if (0 <= next && next <= 100000 && !visited[next]) {
                 q.push(next);
                 visited[next] = visited[cur] + 1;
                 if (next == k) {
