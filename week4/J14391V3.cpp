@@ -7,31 +7,31 @@ int sum(int cases) {
     int result = 0;
 
     for (int i = 0; i < n; i++) {
-        string numString;
+        int num = 0;
         for (int j = 0; j < m; j++) {
             int idx = i * m + j;
             if (cases & (1 << idx)) { // 1
-                result += atoi(numString.c_str());
-                numString = "";
+                result += num;
+                num = 0;
             } else { // 0
-                numString += to_string(a[i][j]);
+                num = 10 * num + a[i][j];
             }
         }
-        result += atoi(numString.c_str());
+        result += num;
     }
     
     for (int j = 0; j < m; j++) {
-        string numString;
+        int num = 0;
         for (int i = 0; i < n; i++) {
             int idx = i * m + j;
             if (cases & (1 << idx)) { // 1
-                numString += to_string(a[i][j]);
+                num = 10 * num + a[i][j];
             } else { // 0
-                result += atoi(numString.c_str());
-                numString = "";
+                result += num;
+                num = 0;
             }
         }
-        result += atoi(numString.c_str());
+        result += num;
     }
 
     return result;
