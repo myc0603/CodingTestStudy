@@ -63,7 +63,6 @@ int main() {
         // 상어 잡기
         for (int row = 1; row <= n; row++) {
             int shark_index = a[row][fisher_pos];
-            cout << "  catch? -> " << shark_index << '\n';
             if (shark_index && !sharks[shark_index].die) {
                 catch_size += sharks[shark_index].sizes;
                 sharks[shark_index].die = true;
@@ -77,7 +76,6 @@ int main() {
         for (int i = 1; i <= shark_cnt; i++) {
             if (sharks[i].die) continue;
             
-            cout << "  shark" << i << " ";
             a[sharks[i].y][sharks[i].x] = 0;
             auto next_pos = sharks[i].move();
             new_positions.push_back( { i, next_pos } );
