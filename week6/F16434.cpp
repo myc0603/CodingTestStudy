@@ -28,6 +28,7 @@ int main() {
     long long cur_hp = 1;
     long long cur_atk = final_atk;
 
+    long long max_hp = cur_hp;
     for (auto room = rooms.rbegin(); room != rooms.rend(); ++room) {
         cout << "cur HP: " << cur_hp << ", cur ATTACK: " << cur_atk << '\n';
         if (room -> type == 1) { // monster
@@ -37,6 +38,7 @@ int main() {
 
             cout << "    cur hp: " << cur_hp;
             cur_hp += ((monster_hp + cur_atk - 1) / cur_atk - 1) * monster_atk;
+            max_hp = max(max_hp, cur_hp);
             cout << " -> " << cur_hp << '\n';
         } else { // type == 2 potion
             cout << "  potion attack: " << room -> attack << ", hp: " << room -> hp << '\n';
@@ -53,5 +55,5 @@ int main() {
         cout << '\n';
     }
 
-    cout << cur_hp;
+    cout << max_hp;
 }
