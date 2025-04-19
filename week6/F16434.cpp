@@ -47,8 +47,9 @@ int main() {
             cout << " -> " << cur_atk << "\n";
 
             cout << "    cur hp: " << cur_hp;
-            cur_hp -= room -> hp;
-            if (cur_hp <= 0) cur_hp = 1;
+            cur_hp = max(1LL, cur_hp - room -> hp);
+            // cur_hp -= room -> hp;
+            // if (cur_hp <= 0) cur_hp = 1;
             cout << " -> " << cur_hp << '\n';
         }
         cout << '\n';
