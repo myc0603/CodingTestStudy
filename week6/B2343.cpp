@@ -9,14 +9,14 @@ bool check(int disk_size) {
     for (int i = 0; i < n; i++) {
         sum += lessons[i];
         if (sum > disk_size) {
-            if (lessons[i] > disk_size) return false;
             sum = lessons[i];
             cnt++;
-            if (cnt > m) return false;
+            // if (cnt > m) return false;
         }
     }
 
-    return true;
+    return cnt <= m;
+    // return true;
 }
 
 int main() {
