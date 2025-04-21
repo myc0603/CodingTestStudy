@@ -18,5 +18,12 @@ int main() {
         if (cur < 1) cur = 1;
     }
 
+    // double ans = 0;
+    // double cur = v[0];
+    // for (int i = 1; i < n; i++) {
+    //     cur = max(cur * v[i], v[i]);
+    //     ans = max(ans, cur);
+    // }
+
     cout << fixed << setprecision(3) << ans;
 }
