@@ -1,0 +1,1 @@
+// same solution of K14003
