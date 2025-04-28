@@ -31,7 +31,7 @@ vector<int> dfs(int y, int x, int lastArcade) {
         if (x < m) addVector(result, dfs(y, x + 1, lastArcade));
     } else result = dfs(y, x + 1, lastArcade);
     if (a[y][x]) {
-        for (int i = c; i >= 0; --i) {
+        for (int i = c; i >= 1; --i) {
             result[i] = result[i-1];
         }
         result[0] = 0;
