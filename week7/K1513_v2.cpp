@@ -45,12 +45,11 @@ vector<vector<int>> dfs(int y, int x) {
     } else res = dfs(y, x + 1);
 
     if (curArcade) {
-        for (int i = 1; i <= c; i++) {
-            int temp = 0;
-            temp += res[i-1][0];
+        for (int i = c; i >= 1; i--) {
+            int temp = res[i-1][0];
             res[i-1][0] = 0;
             for (int j = 0; j < curArcade; j++) {
-                res[i][j] = 0;
+                res[i-1][j] = 0;
             }
             for (int j = curArcade + 1; j <= c; j++) {
                 temp = (temp + res[i-1][j]) % MOD;
@@ -73,7 +72,7 @@ int main() {
     vector<int> result(c + 1);
     for (int i = 0; i <= c; i++) {
         for (int x : temp[i]) {
-            result[i] += x;
+            result[i] = (result[i] + x) % MOD;
         }
     }
     
