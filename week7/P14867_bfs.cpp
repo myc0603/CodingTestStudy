@@ -1,12 +1,24 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <map>
+// #include <map>
+#include <unordered_map>
 using namespace std;
 
 int capA, capB, endA, endB;
 // int visited[1002][1002];
-map<pair<int, int>, int> map_visited;
+// map<pair<int, int>, int> map_visited;
+
+struct pair_hash {
+    template <class T1, class T2>
+    std::size_t operator () (std::pair<T1, T2> const &v) const {
+        auto h1 = std::hash<T1>{}(v.first);
+        auto h2 = std::hash<T2>{}(v.second);
+        return h1 ^ h2;
+    }
+};
+
+unordered_map<pair<int, int>, int, pair_hash> map_visited;
 
 vector<pair<int, int>> nextAmounts(int curA, int curB) {
     vector<pair<int, int>> v;
