@@ -1,10 +1,12 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <map>
 using namespace std;
 
 int capA, capB, endA, endB;
-int visited[1002][1002];
+// int visited[1002][1002];
+map<pair<int, int>, int> map_visited;
 
 vector<pair<int, int>> nextAmounts(int curA, int curB) {
     vector<pair<int, int>> v;
@@ -26,7 +28,8 @@ vector<pair<int, int>> nextAmounts(int curA, int curB) {
 int bfs() {
     queue<pair<int, int>> q;
     q.push( {0, 0} );
-    visited[0][0] = 1;
+    // visited[0][0] = 1;
+    map_visited.insert( {{0, 0}, 1} );
 
     while (q.size()) {
         int a = q.front().first;
@@ -34,14 +37,17 @@ int bfs() {
         q.pop();
 
         if (a == endA && b == endB) {
-            return visited[endA][endB] - 1;
+            // return visited[endA][endB] - 1;
+            return map_visited[{endA, endB}] - 1;
         }
 
         auto nextABs = nextAmounts(a, b);
         for (auto p : nextABs) {
-            if (visited[p.first][p.second]) continue;
+            // if (visited[p.first][p.second]) continue;
+            if (map_visited.find({p.first, p.second}) != map_visited.end()) continue;
             q.push(p);
-            visited[p.first][p.second] = visited[a][b] + 1;
+            // visited[p.first][p.second] = visited[a][b] + 1;
+            map_visited[{p.first, p.second}] = map_visited[{a, b}] + 1;
         }
     }
     return -1;
