@@ -1,9 +1,20 @@
 #include <iostream>
-#include <set>
+#include <unordered_set>
+// #include <set>
 using namespace std;
 
+struct pair_hash {
+    template <class T1, class T2>
+    size_t operator () (pair<T1, T2> const &v) const {
+        auto h1 = hash<T1>{}(v.first);
+        auto h2 = hash<T2>{}(v.second);
+        return h1 ^ h2;
+    }
+};
+
 int n, m, nums[2001];
-set<pair<int, int>> evenPelins, oddPelins;
+// set<pair<int, int>> evenPelins, oddPelins;
+unordered_set<pair<int, int>, pair_hash> evenPelins, oddPelins;
 
 int main() {
     ios_base::sync_with_stdio(false);
