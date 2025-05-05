@@ -22,8 +22,10 @@ int main() {
     vector<int> v1, v2;
     makeSubsetSum(0, n / 2, v1, 0);
     makeSubsetSum(n / 2, n, v2, 0);
-    sort(v2.begin(), v2.end());
 
+    sort(v1.begin(), v1.end()); // 필수는 아니지만 정렬된 배열은 메모리 캐시 히트율이 높아져 성능 상승
+    sort(v2.begin(), v2.end());
+    
     long long cnt = 0;
     for (int x : v1) {
         cnt += upper_bound(v2.begin(), v2.end(), s - x) - lower_bound(v2.begin(), v2.end(), s - x);
