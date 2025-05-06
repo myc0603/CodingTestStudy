@@ -6,6 +6,7 @@ using namespace std;
 int a, b, cnt;
 unordered_set<int> visited;
 
+// a -> b a가 무지 크면 오버플로우 발생해서 UB
 int main() {
     cin >> a >> b;
 
