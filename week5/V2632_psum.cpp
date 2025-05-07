@@ -5,6 +5,7 @@ using namespace std;
 int sum, n, m, a[1005], b[1005], tot_a, tot_b, cnt;
 unordered_map<int, int> map1;
 
+// todo
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

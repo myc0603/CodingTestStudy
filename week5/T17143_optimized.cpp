@@ -55,6 +55,7 @@ void fight(int s1, int s2) {
     }
 }
 
+// todo
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

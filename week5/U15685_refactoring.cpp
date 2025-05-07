@@ -32,6 +32,7 @@ void checkCurve(int x, int y, int d, int g) {
     }
 }
 
+// todo
 int main() {
     cin >> n;
     for (int i = 0; i < n; i++) {
