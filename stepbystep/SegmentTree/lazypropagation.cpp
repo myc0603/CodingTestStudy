@@ -41,7 +41,7 @@ long long sum(int left, int right, int node, int start, int end) {
 void update(int left, int right, long long diff, int node, int start, int end) {
     lazyUpdate(node, start, end);
     if (right < start || end < left) return;
-    if (left <= start && end <= right) {
+    if (left <= start && end <= right) { // 리프 노드 포함
         // 여기까지만 업데이트하고 멈춤 자식 노드는 lazy에 등록만 한다.
         tree[node] += diff * (end - start + 1);
         if (start != end) {
