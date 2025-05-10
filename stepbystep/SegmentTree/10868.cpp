@@ -4,29 +4,29 @@
 #include <cmath>
 using namespace std;
 
-int n, m, a[100002];
-vector<int> minTree;
+int n, m;
+vector<int> arr, tree;
 
-void init(int node, int start, int end) {
+int init(int node, int start, int end) {
     if (start == end) {
-        minTree[node] = a[start];
-        return;
+        tree[node] = arr[start];
+        return tree[node];
     }
 
     int mid = (start + end) / 2;
-    init(node * 2, start, mid);
-    init(node * 2 + 1, mid + 1, end);
-    minTree[node] = min(minTree[2*node], minTree[2*node + 1]);
+    // int lmin = init(2 * node, start, mid);
+    // int rmin = init(2 * node + 1, mid + 1, end);
+    return tree[node] = min(init(2 * node, start, mid), init(2 * node + 1, mid + 1, end));
 }
 
-int minQuery(int left, int right, int node, int start, int end) {
-    if (right < start || end < left) return 2e9;
-    if (left <= start && end <= right) return minTree[node];
+int query(int left, int right, int node, int start, int end) {
+    if (right < start || end < left) return 1e9;
+    if (left <= start && end <= right) return tree[node];
 
     int mid = (start + end) / 2;
-    int leftResult = minQuery(left, right, 2 * node, start, mid);
-    int rightResult = minQuery(left, right, 2 * node + 1, mid + 1, end);
-    return min(leftResult, rightResult);
+    int lmin = query(left, right, 2 * node, start, mid);
+    int rmin = query(left, right, 2 * node + 1, mid + 1, end);
+    return min(lmin, rmin);
 }
 
 int main() {
@@ -34,15 +34,16 @@ int main() {
     cin.tie(NULL);
 
     cin >> n >> m;
-    int h = ceil(log2(n));
-    minTree.resize(1 << (h + 1));
+    arr.resize(n + 1);
+    for (int i = 1; i <= n; ++i) cin >> arr[i];
 
-    for (int i = 1; i <= n; ++i) cin >> a[i];
+    int h = ceil(log2(n));
+    tree.resize(1 << (h + 1));
     init(1, 1, n);
 
     while (m--) {
-        int l, r;
-        cin >> l >> r;
-        cout << minQuery(l, r, 1, 1, n) << '\n';
+        int a, b;
+        cin >> a >> b;
+        cout << query(a, b, 1, 1, n) << '\n';
     }
 }
