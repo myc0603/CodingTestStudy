@@ -14,7 +14,7 @@ struct Spot {
     }
 };
 
-int n, m, t, d, a[27][27], minTimeToGo[27][27], minTimeToCome[27][27];
+int n, m, t, d, a[27][27], minTime[2][27][27];
 int dy[] = {1, -1, 0, 0};
 int dx[] = {0, 0, 1, -1};
 vector<Spot> spots;
@@ -28,10 +28,10 @@ int height(char c) {
     return c - 'a' + 26;
 }
 
-void dijkstra() {
+void dijkstra(bool isReturn) {
     priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<>> pq1, pq2;
     pq1.push( {0, {0, 0}} );
-    minTimeToGo[0][0] = 0;
+    minTime[isReturn][0][0] = 0;
 
     while (pq1.size()) {
         int curCost = pq1.top().first;
@@ -39,42 +39,19 @@ void dijkstra() {
         int x = pq1.top().second.second;
         pq1.pop();
 
-        if (curCost > minTimeToGo[y][x]) continue;
+        if (curCost > minTime[isReturn][y][x]) continue;
 
         for (int i = 0; i < 4; ++i) {
             int ny = y + dy[i];
             int nx = x + dx[i];
             if (!inMap(ny, nx)) continue;
             int diff = a[ny][nx] - a[y][x];
+            if (isReturn) diff *= -1;
             if (abs(diff) > t) continue; 
             int nextCost = curCost + (diff > 0 ? diff * diff : 1);
-            if (nextCost < minTimeToGo[ny][nx]) {
+            if (nextCost < minTime[isReturn][ny][nx]) {
                 pq1.push( {nextCost, {ny, nx}} );
-                minTimeToGo[ny][nx] = nextCost;
-            }
-        }
-    }
-
-    pq2.push( {0, {0, 0}} );
-    minTimeToCome[0][0] = 0;
-    while (pq2.size()) {
-        int curCost = pq2.top().first;
-        int y = pq2.top().second.first;
-        int x = pq2.top().second.second;
-        pq2.pop();
-
-        if (curCost > minTimeToCome[y][x]) continue;
-
-        for (int i = 0; i < 4; ++i) {
-            int ny = y + dy[i];
-            int nx = x + dx[i];
-            if (!inMap(ny, nx)) continue;
-            int diff = a[y][x] - a[ny][nx];
-            if (abs(diff) > t) continue; 
-            int nextCost = curCost + (diff > 0 ? diff * diff : 1);
-            if (nextCost < minTimeToCome[ny][nx]) {
-                pq2.push( {nextCost, {ny, nx}} );
-                minTimeToCome[ny][nx] = nextCost;
+                minTime[isReturn][ny][nx] = nextCost;
             }
         }
     }
@@ -95,15 +72,15 @@ int main() {
     }
     sort(spots.begin(), spots.end());
 
-    fill(&minTimeToGo[0][0], &minTimeToGo[0][0] + 27 * 27, 1e9);
-    fill(&minTimeToCome[0][0], &minTimeToCome[0][0] + 27 * 27, 1e9);
+    fill(&minTime[0][0][0], &minTime[0][0][0] + 2 * 27 * 27, 1e9);
 
-    dijkstra();
+    dijkstra(0);
+    dijkstra(1);
 
     for (auto rit = spots.rbegin(); rit != spots.rend(); ++rit) {
         int y = rit -> y;
         int x = rit -> x;
-        if (minTimeToGo[y][x] + minTimeToCome[y][x] <= d) {
+        if (minTime[0][y][x] + minTime[1][y][x] <= d) {
             cout << rit -> height;
             return 0;
         }
