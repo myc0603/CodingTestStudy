@@ -22,6 +22,10 @@ int adjHoleHeight(int y, int x, int ny, int nx) {
     return lengthHoles[y][max(x, nx)];
 }
 
+bool inMap(int y, int x) {
+    return 1 <= y && y <= n && 1 <= x && x <= m;
+}
+
 void dijkstra(vector<State> v) {
     priority_queue<State, vector<State>, cmp> pq;
     for (auto s : v) pq.push(s);
@@ -37,6 +41,7 @@ void dijkstra(vector<State> v) {
         for (int i = 0; i < 4; ++i) {
             int ny = y + dy[i];
             int nx = x + dx[i];
+            if (!inMap(ny, nx)) continue;
 
             // height는 cur의 높이, newHeight는 다음 인접 칸의 높이.
             // 다음 인접칸의 현재높이는 중요치 않은듯....? 차피 밑에 if문에서 현재높이랑 비교
@@ -69,10 +74,11 @@ int main() {
     }
 
     fill(&water[0][0], &water[0][0] + 1005 * 1005, h);
-    for (int i = 0; i <= n + 1; ++i) water[i][0] = 0;
-    for (int i = 0; i <= n + 1; ++i) water[i][m+1] = 0;
-    for (int j = 0; j <= m + 1; ++j) water[0][j] = 0;
-    for (int j = 0; j <= m + 1; ++j) water[n+1][j] = 0;
+    // inMap() 쓰면 아래 로직 필요없음
+    // for (int i = 0; i <= n + 1; ++i) water[i][0] = 0;
+    // for (int i = 0; i <= n + 1; ++i) water[i][m+1] = 0;
+    // for (int j = 0; j <= m + 1; ++j) water[0][j] = 0;
+    // for (int j = 0; j <= m + 1; ++j) water[n+1][j] = 0;
     
     vector<State> v;
     for (int i = 1; i <= n; ++i) {
