@@ -12,7 +12,7 @@ vector<int> cands;
 void dijkstra() {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
     pq.push( {0, s} );
-
+    dis[s] = 0;
     while (pq.size()) {
         int cost = pq.top().first;
         int cur = pq.top().second;
@@ -23,7 +23,7 @@ void dijkstra() {
         for (auto p : adj[cur]) {
             int nextCost = cost + p.first;
             int nxt = p.second;
-            if (nxt == s) continue; // 이거만 하면 되나? 될 거 같긴 함
+            // if (nxt == s) continue; // 이거만 하면 되나? 될 거 같긴 함
             if (dis[nxt] > nextCost) {
                 dis[nxt] = nextCost;
                 pq.push( {nextCost, nxt} );

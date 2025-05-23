@@ -12,6 +12,7 @@ vector<int> cands;
 void dijkstra() {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
     pq.push( {0, s} );
+    dis[s] = 0;
 
     while (pq.size()) {
         int cost = pq.top().first;
