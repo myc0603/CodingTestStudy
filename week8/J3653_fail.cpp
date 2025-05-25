@@ -43,7 +43,7 @@ int main() {
             if (pos[dvd]) {
                 update(dvd, 1);
                 cout << pos[dvd] + query(dvd + 1, n) << ' ';
-            } else {
+            } else { // 중복 고려 안 됨..
                 cout << i - before[dvd] - 1 << ' ';
             }
 
