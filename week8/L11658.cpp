@@ -34,10 +34,9 @@ int sum(int y, int x) {
 }
 
 int query(int x1, int y1, int x2, int y2) {
-    return sum(y2, x2) - sum(y2, x1 - 1) - sum(y1 - 1, x2) + sum(y1 - 1, x1 - 1);
+    return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) + sum(x1 - 1, y1 - 1);
 }
 
-// ll? 안해도 될듯
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -50,23 +49,15 @@ int main() {
         }
     }
 
-    // cout << "check tree\n";
-    // for (int i = 1; i <= n; ++i) {
-    //     for (int j = 1; j <= n; ++j) {
-    //         cout << tree[i][j] << ' ';
-    //     }
-    //     cout << '\n';
-    // }
-
     int w;
     while (m--) {
         cin >> w;
         if (w == 0) {
             int x, y, c;
             cin >> x >> y >> c;
-            int diff = c - a[y][x];
-            update(y, x, diff);
-            a[y][x] = c;
+            int diff = c - a[x][y];
+            update(x, y, diff);
+            a[x][y] = c;
         } else { // w == 1
             int x1, y1, x2, y2;
             cin >> x1 >> y1 >> x2 >> y2;
