@@ -8,6 +8,40 @@ using namespace std;
 int n;
 char cube[6][3][3], color[6] = {'w', 'y', 'r', 'o', 'g', 'b'};
 unordered_map<char, int> face_map;
+vector<char *> v;
+vector<vector<char *>> rotatingVector = {
+    {
+        &cube[3][0][2], &cube[3][0][1], &cube[3][0][0],
+        &cube[5][0][2], &cube[5][0][1], &cube[5][0][0],
+        &cube[2][0][2], &cube[2][0][1], &cube[2][0][0],
+        &cube[4][0][2], &cube[4][0][1], &cube[4][0][0]
+    }, {
+        &cube[2][2][0], &cube[2][2][1], &cube[2][2][2],
+        &cube[5][2][0], &cube[5][2][1], &cube[5][2][2],
+        &cube[3][2][0], &cube[3][2][1], &cube[3][2][2],
+        &cube[4][2][0], &cube[4][2][1], &cube[4][2][2]
+    }, {
+        &cube[0][2][0], &cube[0][2][1], &cube[0][2][2],
+        &cube[5][0][0], &cube[5][1][0], &cube[5][2][0],
+        &cube[1][0][2], &cube[1][0][1], &cube[1][0][0],
+        &cube[4][2][2], &cube[4][1][2], &cube[4][0][2]
+    }, {
+        &cube[0][0][2], &cube[0][0][1], &cube[0][0][0],
+        &cube[4][0][0], &cube[4][1][0], &cube[4][2][0],
+        &cube[1][2][0], &cube[1][2][1], &cube[1][2][2],
+        &cube[5][2][2], &cube[5][1][2], &cube[5][0][2]
+    }, {
+        &cube[0][0][0], &cube[0][1][0], &cube[0][2][0],
+        &cube[2][0][0], &cube[2][1][0], &cube[2][2][0],
+        &cube[1][0][0], &cube[1][1][0], &cube[1][2][0],
+        &cube[3][2][2], &cube[3][1][2], &cube[3][0][2]
+    }, {
+        &cube[0][2][2], &cube[0][1][2], &cube[0][0][2],
+        &cube[3][0][0], &cube[3][1][0], &cube[3][2][0],
+        &cube[1][2][2], &cube[1][1][2], &cube[1][0][2],
+        &cube[2][2][2], &cube[2][1][2], &cube[2][0][2]
+    }
+};
 
 void initMap() {
     face_map.insert( {'U', 0} );
@@ -28,47 +62,7 @@ void initCube() {
     }
 }
 
-vector<char*> buildRotatingArr(int face) {
-    if (face == 0) return {
-        &cube[3][0][2], &cube[3][0][1], &cube[3][0][0],
-        &cube[5][0][2], &cube[5][0][1], &cube[5][0][0],
-        &cube[2][0][2], &cube[2][0][1], &cube[2][0][0],
-        &cube[4][0][2], &cube[4][0][1], &cube[4][0][0]
-    };
-    if (face == 1) return {
-        &cube[2][2][0], &cube[2][2][1], &cube[2][2][2],
-        &cube[5][2][0], &cube[5][2][1], &cube[5][2][2],
-        &cube[3][2][0], &cube[3][2][1], &cube[3][2][2],
-        &cube[4][2][0], &cube[4][2][1], &cube[4][2][2]
-    };
-    if (face == 2) return {
-        &cube[0][2][0], &cube[0][2][1], &cube[0][2][2],
-        &cube[5][0][0], &cube[5][1][0], &cube[5][2][0],
-        &cube[1][0][2], &cube[1][0][1], &cube[1][0][0],
-        &cube[4][2][2], &cube[4][1][2], &cube[4][0][2]
-    };
-    if (face == 3) return {
-        &cube[0][0][2], &cube[0][0][1], &cube[0][0][0],
-        &cube[4][0][0], &cube[4][1][0], &cube[4][2][0],
-        &cube[1][2][0], &cube[1][2][1], &cube[1][2][2],
-        &cube[5][2][2], &cube[5][1][2], &cube[5][0][2]
-    };
-    if (face == 4) return {
-        &cube[0][0][0], &cube[0][1][0], &cube[0][2][0],
-        &cube[2][0][0], &cube[2][1][0], &cube[2][2][0],
-        &cube[1][0][0], &cube[1][1][0], &cube[1][2][0],
-        &cube[3][2][2], &cube[3][1][2], &cube[3][0][2]
-    };
-    assert(face == 5);
-    return {
-        &cube[0][2][2], &cube[0][1][2], &cube[0][0][2],
-        &cube[3][0][0], &cube[3][1][0], &cube[3][2][0],
-        &cube[1][2][2], &cube[1][1][2], &cube[1][0][2],
-        &cube[2][2][2], &cube[2][1][2], &cube[2][0][2]
-    };
-}
-
-void doRotate(vector<char*> &v, char dir) { // &v일 필요는 없긴 함
+void doRotate(char dir) {
     vector<char> rv;
     for (auto ptr : v) rv.push_back(*ptr);
     rotate(rv.begin(), rv.begin() + rv.size() * (dir == '+' ? 3 : 1) / 4, rv.end());
@@ -77,22 +71,18 @@ void doRotate(vector<char*> &v, char dir) { // &v일 필요는 없긴 함
 
 void rotate(int face, char dir) {
     auto cit = &cube[face][0][0];
-    vector<char *> v = {
+    v = {
         cit, cit + 1, cit + 2, cit + 5, cit + 8, cit + 7, cit + 6, cit + 3
     };
-    doRotate(v, dir);
+    doRotate(dir);
 
-    v = buildRotatingArr(face);
-    doRotate(v, dir);
+    v = rotatingVector[face];
+    doRotate(dir);
 }
 void printCube(int print_cnt);
 void test1();
 void test2();
 int main() {
-    // test
-    // test1();
-    // test2();
-
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
