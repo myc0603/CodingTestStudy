@@ -23,7 +23,7 @@ void dijkstra() {
         for (int i = 0; i < 4; ++i) {
             int ny = y + dy[i];
             int nx = x + dx[i];
-            if (y < 0 || n <= y || x < 0 || n <= x) continue;
+            if (ny < 0 || n <= ny || nx < 0 || n <= nx) continue;
             int nextCost = cost + a[ny][nx];
             if (dis[ny][nx] > nextCost) {
                 dis[ny][nx] = nextCost;
