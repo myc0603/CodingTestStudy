@@ -2,6 +2,8 @@
 using namespace std;
 int n, m, psum[1030][1030];
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     cin >> n >> m;
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= n; ++j) {
