@@ -38,7 +38,7 @@ int main() {
         py = y;
     }
 
-    if (px != fx) xlines.emplace_back(min(px, fx), max(py, fy));
+    if (px != fx) xlines.emplace_back(min(px, fx), max(px, fx));
     if (py != fy) ylines.emplace_back(min(py, fy), max(py, fy));
 
     sort(xs.begin(), xs.end());
