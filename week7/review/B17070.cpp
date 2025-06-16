@@ -12,8 +12,8 @@ bool canGo(int y, int x, int newState) {
     else if (newState == 2) return inMap(y + 1, x) && a[y+1][x] == 0;
     else { // newState == 1
         return inMap(y, x + 1) && a[y][x+1] == 0
-                && inMap(y + 1, x) && a[y+1][x] == 0
-                && inMap(y + 1, x + 1) && a[y+1][x+1] == 0;
+            && inMap(y + 1, x) && a[y+1][x] == 0
+            && inMap(y + 1, x + 1) && a[y+1][x+1] == 0;
     }
 }
 
